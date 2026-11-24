@@ -157,6 +157,7 @@ allure serve target/allure-results
 - No authentication
 - The history endpoint returns all records without pagination
 - Planned: other recognition engines, more languages, duration in history, CI pipeline (GitHub Actions)
+- The language is not detected automatically: if the selected language does not match the recording (in either direction), the result is meaningless text and the app still reports success (Vosk limitation)
 
 ## License
 
