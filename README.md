@@ -4,8 +4,8 @@ Web application that transcribes audio and video files into text. Built as an MV
 
 > **Status:** MVP. See [Known issues & Roadmap](#known-issues--roadmap).
 
-<!-- TODO: add a screenshot, e.g. docs/screenshot.png -->
-<!-- ![Aureva](docs/screenshot.png) -->
+
+![Aureva](docs/screenshot.png)
 
 ## Features
 
