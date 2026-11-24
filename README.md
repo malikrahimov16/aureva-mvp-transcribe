@@ -152,7 +152,7 @@ allure serve target/allure-results
 
 - Recording duration is not stored, so the "Duration" column in the history table always shows "—"
 - "Free Plan" / "Upgrade" and the minutes counter are UI placeholders (no billing or usage limits implemented)
-- Templates and Integrations in the sidebar are placeholders <!-- TODO: confirm what happens on click -->
+- Templates and Integrations in the sidebar are placeholders: clicking them does nothing yet (no page and no "coming soon" message)
 - Account, authentication and support actions are not implemented yet
 - No authentication
 - The history endpoint returns all records without pagination
@@ -160,4 +160,8 @@ allure serve target/allure-results
 
 ## License
 
-<!-- TODO: add a license (e.g. MIT) or remove this section -->
+This project is licensed under the [MIT License](LICENSE).
+
+## Author
+
+Created by [malikrahimov16](https://github.com/malikrahimov16).
