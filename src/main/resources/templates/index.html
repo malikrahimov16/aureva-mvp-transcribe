@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0b0b">
+    <title>AUREVA — AI Transcription</title>
+
+    <link rel="stylesheet" href="/style.css">
+    <script src="/app.js" defer></script>
+</head>
+<body>
+<div class="app-layout">
+
+    <aside class="sidebar" aria-label="Application sidebar" data-i18n-aria-label="sidebarLabel">
+        <a id="brand-home" data-testid="brand-home" class="brand" href="/">
+            <span class="brand-icon" aria-hidden="true">≋</span>
+            <span>
+                <strong>AUREVA</strong>
+                <small data-i18n="brandSubtitle">Speech to text</small>
+            </span>
+        </a>
+
+        <nav class="main-nav" aria-label="Main navigation" data-i18n-aria-label="navigationLabel">
+            <a id="nav-transcribe" data-testid="nav-transcribe"
+               class="nav-item active" href="#transcribe" data-i18n="navTranscribe">Transcribe</a>
+
+            <a id="nav-record" data-testid="nav-record"
+               class="nav-item" href="#record" data-i18n="navRecord">Record</a>
+
+            <a id="nav-history" data-testid="nav-history"
+               class="nav-item" href="#history" data-i18n="navHistory">History</a>
+
+            <a id="nav-templates" data-testid="nav-templates"
+               class="nav-item" href="#templates" data-i18n="navTemplates">Templates</a>
+
+            <a id="nav-integrations" data-testid="nav-integrations"
+               class="nav-item" href="#integrations" data-i18n="navIntegrations">Integrations</a>
+
+            <a id="nav-settings" data-testid="nav-settings"
+               class="nav-item" href="#settings" data-i18n="navSettings">Settings</a>
+        </nav>
+
+        <section class="plan-card">
+            <p class="plan-label" data-i18n="planLabel">FREE PLAN</p>
+            <h3 data-i18n="freePlan">Free Plan</h3>
+            <p data-i18n="planUsage">0 / 10 minutes used</p>
+            <div class="plan-progress"><span></span></div>
+
+            <button id="upgrade-button"
+                    data-testid="upgrade-button"
+                    class="upgrade-button"
+                    type="button"
+                    data-i18n="upgrade">
+                Upgrade
+            </button>
+        </section>
+
+        <div class="sidebar-bottom">
+            <a id="help-support-link"
+               data-testid="help-support-link"
+               href="#help"
+               data-i18n="helpSupport">Help &amp; Support</a>
+
+            <a id="logout-link"
+               data-testid="logout-link"
+               href="#logout"
+               data-i18n="logout">Log out</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div class="search-box">
+                <span aria-hidden="true">⌕</span>
+                <input id="file-search"
+                       data-testid="file-search"
+                       type="search"
+                       placeholder="Search your files..."
+                       aria-label="Search files"
+                       data-i18n-placeholder="searchPlaceholder"
+                       data-i18n-aria-label="searchLabel">
+            </div>
+
+            <div class="topbar-actions">
+                <button id="theme-toggle"
+                        data-testid="theme-toggle"
+                        class="icon-button"
+                        type="button"
+                        aria-label="Theme"
+                        data-i18n-aria-label="themeLabel">☼</button>
+
+                <button id="language-menu-button"
+                        data-testid="language-menu-button"
+                        class="language-button"
+                        type="button"
+                        aria-label="Switch interface language"
+                        data-i18n-aria-label="switchLanguage">
+                    ◎ <span id="current-language-label">EN</span>⌄
+                </button>
+
+                <button id="notifications-button"
+                        data-testid="notifications-button"
+                        class="icon-button"
+                        type="button"
+                        aria-label="Notifications"
+                        data-i18n-aria-label="notifications">♧</button>
+
+                <button id="account-menu-button"
+                        data-testid="account-menu-button"
+                        class="account-button"
+                        type="button">
+                    <span class="avatar">A</span>
+                    <span data-i18n="myAccount">My Account</span>⌄
+                </button>
+            </div>
+        </header>
+
+        <section class="hero-banner">
+            <div class="hero-copy">
+                <span class="eyebrow" data-i18n="heroEyebrow">SPEECH TO TEXT</span>
+
+                <h1>
+                    <span data-i18n="heroTitleFirst">Turn your voice</span><br>
+                    <span data-i18n="heroTitleSecond">into text</span>
+                </h1>
+
+                <p>
+                    <span data-i18n="heroDescriptionFirst">Fast, clear transcription for your meetings,</span><br>
+                    <span data-i18n="heroDescriptionSecond">notes and ideas.</span>
+                </p>
+
+                <div class="hero-features">
+                    <span>ϟ &nbsp; <span data-i18n="featureAccuracy">High accuracy</span></span>
+                    <span>◎ &nbsp; <span data-i18n="featureLanguages">2 languages</span></span>
+                    <span>♢ &nbsp; <span data-i18n="featurePrivacy">Temporary files removed after processing</span></span>
+                </div>
+            </div>
+
+            <div class="hero-wave" aria-hidden="true">
+                <svg viewBox="0 0 520 190"
+                     width="520"
+                     height="190"
+                     preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                        <linearGradient id="waveGradient"
+                                        x1="0" y1="0"
+                                        x2="1" y2="0">
+                            <stop offset="0%"
+                                  stop-color="#ff5b16"
+                                  stop-opacity=".15"/>
+                            <stop offset="48%"
+                                  stop-color="#ff741f"/>
+                            <stop offset="100%"
+                                  stop-color="#ff4b0b"
+                                  stop-opacity=".25"/>
+                        </linearGradient>
+                    </defs>
+
+                    <path
+                            d="M0 100 C55 100 60 50 105 85 S150 145 195 85 S250 25 290 85 S350 155 390 85 S455 55 520 100"
+                            fill="none"
+                            stroke="url(#waveGradient)"
+                            stroke-width="3"/>
+
+                    <path
+                            d="M0 100 C55 100 60 130 105 100 S150 60 195 100 S250 165 290 100 S350 35 390 100 S455 125 520 100"
+                            fill="none"
+                            stroke="#ff7728"
+                            stroke-opacity=".65"
+                            stroke-width="2"/>
+
+                    <path
+                            d="M0 100 C60 80 65 115 105 100 S160 75 195 100 S255 140 290 100 S355 65 390 100 S460 115 520 100"
+                            fill="none"
+                            stroke="#ff9a42"
+                            stroke-opacity=".65"
+                            stroke-width="1.5"/>
+                </svg>
+            </div>
+        </section>
+
+        <section class="workspace" id="transcribe">
+            <div class="upload-section">
+                <div class="section-tabs">
+                    <button id="tab-upload-file"
+                            data-testid="tab-upload-file"
+                            class="tab active"
+                            type="button"
+                            data-i18n="uploadFile">
+                        Upload File
+                    </button>
+
+                    <button id="record"
+                            data-testid="tab-record-audio"
+                            class="tab"
+                            type="button"
+                            data-i18n="recordAudio">
+                        Record Audio
+                    </button>
+                </div>
+
+                <section id="recording-panel"
+                         data-testid="recording-panel"
+                         class="recording-panel"
+                         aria-label="Audio recording"
+                         data-i18n-aria-label="audioRecording"
+                         hidden>
+
+                    <div class="recording-header">
+                        <span id="recording-indicator"
+                              class="recording-indicator"
+                              aria-hidden="true"></span>
+
+                        <span id="recording-status"
+                              data-testid="recording-status"
+                              aria-live="polite">
+                            Ready to record
+                        </span>
+
+                        <time id="recording-timer"
+                              data-testid="recording-timer">
+                            00:00
+                        </time>
+                    </div>
+
+                    <p class="recording-description" data-i18n="recordingDescription">
+                        Record your voice directly from your microphone.
+                        Maximum duration: 5 minutes.
+                    </p>
+
+                    <div class="recording-controls">
+                        <button id="start-recording-button"
+                                data-testid="start-recording-button"
+                                class="transcribe-button"
+                                type="button"
+                                data-i18n="startRecording">
+                            ● Start Recording
+                        </button>
+
+                        <button id="stop-recording-button"
+                                data-testid="stop-recording-button"
+                                class="secondary-button"
+                                type="button"
+                                disabled
+                                data-i18n="stopRecording">
+                            ■ Stop Recording
+                        </button>
+                    </div>
+
+                    <audio id="recording-preview"
+                           data-testid="recording-preview"
+                           controls
+                           preload="metadata"
+                           hidden>
+                    </audio>
+
+                    <button id="use-recording-button"
+                            data-testid="use-recording-button"
+                            class="transcribe-button"
+                            type="button"
+                            disabled
+                            data-i18n="useRecording">
+                        Use Recording
+                    </button>
+
+                    <p id="recording-error"
+                       data-testid="recording-error"
+                       class="recording-error"
+                       aria-live="polite">
+                    </p>
+                </section>
+
+                <div id="file-dropzone"
+                     data-testid="file-dropzone"
+                     class="dropzone"
+                     role="button"
+                     tabindex="0"
+                     aria-label="Select an audio or video file"
+                     data-i18n-aria-label="selectAudioVideo">
+
+                    <span class="cloud-icon" aria-hidden="true">⇧</span>
+
+                    <h2 data-i18n="dropzoneTitle">Drag &amp; drop your audio or video file here</h2>
+
+                    <p>
+                        <span data-i18n="orText">or</span>
+                        <label id="browse-file-label"
+                               data-testid="browse-file-label"
+                               for="mediaFile"
+                               class="browse-link"
+                               data-i18n="browseFile">
+                            click to browse
+                        </label>
+                    </p>
+
+                    <input id="mediaFile"
+                           data-testid="media-file-input"
+                           class="file-input"
+                           type="file"
+                           accept=".mp3,.wav,.m4a,.mp4,.webm"
+                           aria-describedby="selectedFileName">
+
+                    <p id="selectedFileName"
+                       data-testid="selected-file-name"
+                       class="file-status"
+                       aria-live="polite">
+                        No file selected
+                    </p>
+
+                    <small data-i18n="supportedFormats">
+                        MP3, WAV, M4A, MP4, WEBM · Max 50 MB · Up to 5 minutes
+                    </small>
+                </div>
+            </div>
+
+            <aside class="transcribe-settings"
+                   aria-label="Transcription settings"
+                   data-i18n-aria-label="transcriptionSettings">
+
+                <label id="language-label"
+                       data-testid="language-label"
+                       for="language"
+                       data-i18n="language">
+                    Language
+                </label>
+
+                <select id="language"
+                        data-testid="language-select">
+                    <option value="ru" data-i18n="languageRussian">Russian</option>
+                    <option value="en" selected data-i18n="languageEnglish">English</option>
+                </select>
+
+                <button id="transcribe-button"
+                        data-testid="transcribe-button"
+                        class="transcribe-button"
+                        type="button">
+                    ✦ &nbsp; <span data-i18n="transcribe">Transcribe</span>
+                </button>
+
+                <p id="processing-note"
+                   data-testid="processing-note"
+                   class="processing-note">
+                    Estimated processing time appears here
+                </p>
+            </aside>
+        </section>
+
+        <section class="results-grid">
+            <article class="panel audio-panel">
+                <div class="file-heading">
+                    <span class="audio-file-icon" aria-hidden="true">♫</span>
+                    <div>
+                        <h3 data-i18n="noAudioSelected">No audio selected</h3>
+                        <p data-i18n="uploadToSeeDetails">Upload a file to see audio details.</p>
+                    </div>
+                </div>
+
+                <p class="sample-note" data-i18n="audioPreviewNote">
+                    Audio preview will be available after transcription.
+                </p>
+            </article>
+
+            <article class="panel transcript-panel">
+                <div class="panel-heading">
+                    <h3 data-i18n="transcriptTitle">Transcript</h3>
+
+                    <button id="transcript-copy-button"
+                            data-testid="transcript-copy-button"
+                            class="secondary-button"
+                            type="button"
+                            data-i18n="copy">
+                        Copy
+                    </button>
+                </div>
+
+                <div class="transcript-lines" id="transcript-content">
+                    <p class="transcript-placeholder" data-i18n="transcriptPlaceholder">
+                        Your transcript will appear here.
+                    </p>
+                </div>
+            </article>
+        </section>
+
+        <section class="panel recent-files" id="history">
+            <div class="panel-heading">
+                <h2 data-i18n="recentFiles">Recent Files</h2>
+
+                <a id="history-view-all"
+                   data-testid="history-view-all"
+                   href="#history"
+                   data-i18n="viewAll">
+                    View All
+                </a>
+            </div>
+
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                    <tr>
+                        <th data-i18n="historyName">Name</th>
+                        <th data-i18n="historyDuration">Duration</th>
+                        <th data-i18n="historyLanguage">Language</th>
+                        <th data-i18n="historyCreated">Created</th>
+                        <th data-i18n="historyStatus">Status</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="history-body">
+                    <tr>
+                        <td colspan="5" class="empty-history" data-i18n="noHistory">
+                            No transcriptions yet.
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Settings page -->
+        <section id="settings"
+                 data-testid="settings-page"
+                 class="settings-page"
+                 hidden>
+
+            <div class="page-heading">
+                <span class="eyebrow" data-i18n="preferences">PREFERENCES</span>
+                <h1 data-i18n="settingsTitle">Settings</h1>
+                <p data-i18n="settingsDescription">Manage your AUREVA application preferences.</p>
+            </div>
+
+            <section class="panel settings-section">
+                <div class="panel-heading">
+                    <h2 data-i18n="general">General</h2>
+                </div>
+
+                <div class="settings-option">
+                    <div>
+                        <h3 data-i18n="interfaceLanguage">Interface Language</h3>
+                        <p data-i18n="interfaceLanguageDescription">Choose the language used across the application.</p>
+                    </div>
+
+                    <select id="settings-interface-language"
+                            data-testid="settings-interface-language"
+                            aria-label="Interface language"
+                            data-i18n-aria-label="interfaceLanguage">
+                        <option value="en">English</option>
+                        <option value="ru">Русский</option>
+                    </select>
+                </div>
+
+                <div class="settings-option">
+                    <div>
+                        <h3 data-i18n="appearance">Appearance</h3>
+                        <p data-i18n="appearanceDescription">Choose your preferred application theme.</p>
+                    </div>
+
+                    <select id="settings-theme"
+                            data-testid="settings-theme"
+                            aria-label="Application theme"
+                            data-i18n-aria-label="applicationTheme">
+                        <option value="dark" data-i18n="darkTheme">Dark</option>
+                        <option value="light" data-i18n="lightTheme">Light</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="panel settings-section">
+                <div class="panel-heading">
+                    <h2 data-i18n="transcriptionSettingsTitle">Transcription</h2>
+                </div>
+
+                <div class="settings-option">
+                    <div>
+                        <h3 data-i18n="defaultRecognitionLanguage">Default Recognition Language</h3>
+                        <p data-i18n="defaultRecognitionDescription">Language selected automatically for new transcriptions.</p>
+                    </div>
+
+                    <select id="settings-default-language"
+                            data-testid="settings-default-language"
+                            aria-label="Default transcription language"
+                            data-i18n-aria-label="defaultTranscriptionLanguage">
+                        <option value="en" data-i18n="languageEnglish">English</option>
+                        <option value="ru" data-i18n="languageRussian">Russian</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="panel settings-section">
+                <div class="panel-heading">
+                    <h2 data-i18n="storagePrivacy">Storage &amp; Privacy</h2>
+                </div>
+
+                <div class="settings-option">
+                    <div>
+                        <h3 data-i18n="uploadedFiles">Uploaded Files</h3>
+                        <p data-i18n="uploadedFilesDescription">Temporary uploaded files are removed after processing.</p>
+                    </div>
+
+                    <span class="settings-status" data-i18n="automaticCleanup">Automatic cleanup</span>
+                </div>
+
+                <div class="settings-option">
+                    <div>
+                        <h3 data-i18n="transcriptionHistory">Transcription History</h3>
+                        <p data-i18n="transcriptionHistoryDescription">Your completed transcripts are stored in the application database.</p>
+                    </div>
+
+                    <span class="settings-status" data-i18n="databaseStorage">Database storage</span>
+                </div>
+            </section>
+
+            <section class="panel settings-section">
+                <div class="panel-heading">
+                    <h2 data-i18n="about">About</h2>
+                </div>
+
+                <div class="settings-option">
+                    <div>
+                        <h3>AUREVA</h3>
+                        <p data-i18n="aboutDescription">Speech-to-text application.</p>
+                    </div>
+
+                    <span class="settings-status" data-i18n="version">Version 0.1.0</span>
+                </div>
+            </section>
+
+            <p id="settings-save-status"
+               data-testid="settings-save-status"
+               class="settings-save-status"
+               aria-live="polite">
+            </p>
+        </section>
+
+        <footer class="page-footer">
+            <span>© 2026 AUREVA</span>
+            <span data-i18n="footerTagline">Speech to text, made simple.</span>
+        </footer>
+    </main>
+</div>
+</body>
+</html>
