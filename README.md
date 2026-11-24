@@ -159,6 +159,24 @@ allure serve target/allure-results
 - Planned: other recognition engines, more languages, duration in history, CI pipeline (GitHub Actions)
 - The language is not detected automatically: if the selected language does not match the recording (in either direction), the result is meaningless text and the app still reports success (Vosk limitation)
 
+## Bugs found during testing
+
+| ID | Summary | Steps | Expected | Actual | Severity | Status |
+|----|---------|-------|----------|--------|----------|--------|
+| BUG-1 | Language mismatch gives meaningless text | Upload English audio → select Russian → Transcribe (and the reverse) | A warning, or a recognisable result | Meaningless words in the selected language, message "Transcription completed successfully" | Low | Open (Vosk limitation) |
+| BUG-2 | Templates and Integrations do nothing | Click "Templates" or "Integrations" in the sidebar | A page or a "coming soon" message | Nothing happens, no feedback | Low | Open |
+| BUG-3 | Duration is always "—" | Transcribe any file → look at Recent Files | The recording duration | "—" for every record (duration is not stored) | Low | Open |
+| BUG-4 | Minutes counter does not change | Transcribe a file → look at "0 / 10 minutes used" | Counter increases | Counter stays at 0 | Low | Open (placeholder) |
+| BUG-5 | Misleading error for a long file name | API: upload a file with a name longer than 255 characters | "File name is too long" | "File name is missing" | Low | Fixed |
+| BUG-6 | Unclear error for audio over 5 minutes | API: upload a recording longer than 5 minutes | A message about the 5-minute limit | Generic "Audio processing failed" (limit was checked only in the browser) | Medium | Fixed |
+
+### Test suite issues found and fixed
+
+- History tests could pass on an empty history (assertions inside loops); they now create their own data first.
+- Tests left records in the database after every run; they now remove what they created.
+- Two UI tests checked the Transcribe button before it was enabled (race condition); they now wait for it.
+- Transcription tests only checked that a transcript was not empty; they now also check that its language matches the selected one.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
